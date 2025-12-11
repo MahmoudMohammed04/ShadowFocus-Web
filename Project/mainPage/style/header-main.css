@@ -1,0 +1,89 @@
+/* HEADER TEXT TUNING */
+.brand-title{
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.brand-quote{
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+/* MAIN CONTENT */
+.main-question{
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.timer-display{
+    font-size: 7rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.controls{
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    position: relative;
+}
+
+#TimerBox {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, auto);
+    position: absolute;
+    left: 350px;
+    top: -50px;
+    background: rgba(20, 20, 40, 0.95);
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.TimerButton {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    width: 80px;
+    height: 36px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.TimerButton:hover{
+    background-color: #7132fd;
+    border-color: #7132fd;
+}
+
+#TimerBox[select-timer-active="true"] {
+    opacity: 1;
+    pointer-events: all;
+    transition: all 0.3s ease;
+    display: grid;
+}
+
+#TimerBox[select-timer-active="false"] {
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* RESPONSIVE */
+@media (width<1000px) {
+    #TimerBox {
+        left: 50px;
+        top: -50px;
+    }
+    #message-box-surrender {
+        left: 20%;
+    }
+}

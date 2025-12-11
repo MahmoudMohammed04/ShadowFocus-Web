@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body{
+    background-image: url(../img/lof.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* dark overlay for better contrast */
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    width: 100% !important;
+}
+
+header {
+    flex-shrink: 0;
+    padding: 16px 0;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    flex-shrink: 0;
+    padding: 16px 32px;
+}
+
+/* responsive adjustments */
+@media (max-width: 768px){
+    .flex-container{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .timer-display{
+        font-size: 4.5rem;
+    }
+
+    .main-question{
+        font-size: 1.3rem;
+    }
+}
+
+ #message-box-surrender{
+            position: absolute;
+            top : -150px;
+            left: 34%;
+            display: grid 1fr;
+           background-color: #222;
+           width: 410px;
+           height: 200px;
+           padding: auto;
+           z-index: 2000;
+            border-radius: 12px;
+        }
+
+
+        @media (width<1000px) {
+            #message-box-surrender {
+                left: 20%;
+                
+            }
+        }
+
+        #message-box-surrender[visible="false"]{
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        #message-box-surrender[visible="true"]{
+            display: grid;
+            opacity: 1;
+            pointer-events: all;
+            transition: all 0.3s ease;
+        }
+
+        #message-box-surrender p{
+            margin-top: 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            color: white;
+        }
+
+
+        @media (max-height: 500px) and (max-width: 900px) {
+    /* This targets small screens (mobile) with very short height (landscape).
+    */
+
+    /* --- GLOBAL LAYOUT ADJUSTMENTS --- */
+    
+    /* Allow the body to scroll if the content still overflows vertically, 
+       but ensure it's still flexible. */
+    body {
+        min-height: 100vh;
+        overflow-y: auto; 
+    }
+    
+    /* Ensure the main content doesn't force a minimum height */
+    main {
+        padding: 10px 0; /* Add some small vertical padding */
+        /* If content in main is still too large, we might need to reduce font sizes */
+    }
+
+    /* Reduce the massive timer size to ensure it fits */
+    .timer-display {
+        font-size: 4.5rem; /* Reduced from 7rem */
+    }
+
+    /* Reduce footer padding */
+    footer {
+        padding: 8px 16px; 
+    }
+
+    /* --- SIDEBAR CHAT HEIGHT ADJUSTMENTS (Crucial for Rooms) --- */
+    
+    /* The sidebar height calculation needs to be shorter when the viewport is short */
+    .sidebar {
+        height: 100%; /* Ensure it's 100% of the viewport height */
+        padding: 15px; /* Reduce padding */
+    }
+    
+    /* Adjust the height calculation for the room canvas, leaving less room 
+       for the title/actions to prevent vertical overflow */
+    #roomCanvas {
+        height: calc(100vh - 100px) !important; /* Reduce space for surrounding elements */
+        margin-top: 10px !important;
+    }
+    
+    /* If the room layout still breaks, we must ensure the stacked chat/user list 
+       shares the space well. */
+    .room-layout {
+        /* This is the container for the stacked list and chat panel */
+        height: 100%; /* Take up all of the roomCanvas height */
+    }
+
+    /* Ensure the user list has a smaller fixed height when space is tight */
+    .user-list {
+        height: 100px; /* Reduced from 120px */
+    }
+}

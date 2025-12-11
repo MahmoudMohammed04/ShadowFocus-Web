@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowFocus</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="mainPage/style/base.css">
+    <link rel="stylesheet" href="mainPage/style/header-main.css">
+    <link rel="stylesheet" href="mainPage/style/buttons.css">
+    <link rel="stylesheet" href="mainPage/style/sidebar.css">
+    <link rel="stylesheet" href="mainPage/style/audio-player.css">
+    <link rel="stylesheet" href="mainPage/style/footer.css">
+    <link rel="stylesheet" href="mainPage/style/sitting.css">
+
+    
+</head>
+<body>
+
+    
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <h2 id="sidebarTitle">
+            <i id="sidebarIcon" class="fa-solid fa-cart-shopping"></i>
+            <span id="sidebarName">Shopping</span>
+        </h2>
+        
+        <!-- Shopping Content -->
+        <div class="sidebar-content active" id="shopping-content">
+            <p><strong>Welcome to the Shop!</strong></p>
+            <p>Use your <i class="fa-solid fa-coins"></i> coins to buy cool themes and skins to customize your experience.</p>
+            
+            <div id="shopGrid" class="item-grid">
+                
+                </div>
+        </div>
+
+
+       <!-- Rooms Content -->
+<div class="sidebar-content" id="rooms-content">
+    <p><strong>Multiplayer Rooms</strong></p>
+
+    <div id="roomActions">
+        <button id ="hostBtn" class="primary-btn" onclick="Rooms.hostRoom()">Host Room</button>
+        <br><br>
+        <input id="joinInput" type="text" placeholder="Enter Room ID" style="width:100%; padding:8px;">
+        <button id="joinBtn" class="primary-btn" style="margin-top: 10px;" onclick="Rooms.joinRoom()">Join Room</button>
+    </div>
+
+    <div id="roomCanvas" style="display:none; margin-top:20px; height: calc(100vh - 180px);">
+
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+            <p><strong>Room ID:</strong> <span id="roomIdDisplay"></span></p>
+            
+            <button onclick="Rooms.LeaveRoom();" class="primary-btn">Leave</button>
+        </div>
+
+        <!-- NEW DISCORD-STYLE LAYOUT WRAPPER -->
+        <div class="room-layout">
+
+            <!-- LEFT USER LIST -->
+            <div class="user-list" id="roomUsers">
+                <!-- Filled dynamically -->
+                <!-- Example of a user:
+                <div class="user-item">
+                    <img src="avatar.jpg">
+                    <span>Mahmoud</span>
+                </div>
+                -->
+            </div>
+
+            <!-- RIGHT CHAT PANEL -->
+            <div class="chat-panel">
+                <div id="chatBox" class="chat-box"></div>
+
+    <div class="chat-input-container"> 
+        <input id="chatInput" 
+            type="text" 
+            placeholder="Type message..." 
+            class="chat-input">
+        <button id="chatSendBtn" class="primary-btn chat-send-btn" onclick="Rooms.sendChat()">Send</button>
+    </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+        <!-- Inventory Content -->
+        <div class="sidebar-content" id="inventory-content">
+            <p><strong>Your Inventory</strong></p>
+    
+            <div id="inventoryGrid" class="item-grid">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- TOGGLE ARROW BUTTON -->
+    <button class="sidebar-toggle" id="sidebarToggle" title="Open Sidebar">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <header>
+        <div class="container flex-container">
+            <div>
+                <h1 class="brand-title">ShadowFocus</h1>
+            </div>
+            <div>
+                <h3 class="brand-quote">"The old ways won't open new doors"</h3>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container text-center" style = "position: relative;">
+            <div id="sitting-panal-overlay" visible="false">
+    <div id="sitting-panal" class="modal-content">
+        <button class="close-btn" onclick="sittingPanal.HideSittingPanal();">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        
+        <h2>User Settings</h2>
+        
+        <label for="sittingInput">User Name:</label>
+        <input type="text" id="sittingInput" placeholder="Enter your name">
+        
+        <label for="sittingInput">Focus Settings:</label>
+        <div class="settings-group">
+            <p>Notify before break:</p>
+            <input type="checkbox" id="notify-check">
+        </div>
+        
+        <button id="sittingBtn" class="primary-btn" onclick="sittingPanal.LogOut();">
+            Log out
+        </button>
+    </div>
+</div>
+            <p class="main-question">What do you want to focus on?</p>
+
+            <div style="margin-bottom: 26px;">
+                <button class="room-button" data-room="gym">Gym</button>
+                <button class="room-button selected" data-room="study">Study Room</button>
+                <button class="room-button" data-room="office">Office</button>
+            </div>
+
+            <div style="position: relative;">
+                <h1 id = "timer" style = "position: relative;" class="timer-display">25:00</h1>
+                
+                <div id = "message-box-surrender" visible="false" >
+                    <div>
+                        <p id="message-text">Surrender your task!</p>
+                    </div>
+                    <div>
+                        <button onclick="Timer.SurrenderFocus();" class="primary-btn">Surrender</button>
+                        <button onclick = "Timer.HideMessageBox();" class="primary-btn">Continue</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button onclick="Timer.ShowTimer();"  class="primary-btn">Start</button>
+                <button id="stopBtn" onclick="Timer.StopTimer(this);" stopped="false" class="secondary-btn">
+                    <i class="fa fa-stop"></i>
+                </button>
+
+                <div id = "TimerBox" select-timer-active="false">
+                    <button onclick="Timer.StartTimer(this);" class = "TimerButton" value = "90:00">90:00</button>
+                    <button onclick="Timer.StartTimer(this);" class = "TimerButton" value = "30:00">30:00</button>
+                    <button onclick="Timer.StartTimer(this);" class = "TimerButton" value = "25:00">25:00</button>
+                    <button onclick="Timer.StartTimer(this);" class = "TimerButton" value = "15:00">15:00</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="flex-container" style = "position: relative;">
+            <div style="position: relative;">
+                <p style="margin:0; font-size:0.85rem; opacity:0.85;">
+                    &copy; 2024 ShadowFocus. All rights reserved.
+                </p>
+                <div id = "audio-button">
+                    <button onclick="OpenAudioPlayer(event);"><i class="fa-solid fa-headphones"></i></button>
+                </div>
+
+                <div id="audio-player" visible="false">
+                    <!-- Thumbnail -->
+                    <img id="thumbnail" src="https://as2.ftcdn.net/jpg/02/38/24/53/1000_F_238245313_xzm7nSzNwyC6eObNZUrOw0hFCpyr00fo.jpg" alt="Thumbnail" />
+
+                    <!-- Title -->
+                    <div id="title">No audio loaded</div>
+                    <div id="player" style="display:none;"></div>
+
+
+                    <!-- Controls -->
+                    <div id="controls">
+                        <button id="play-stop-button" onclick="togglePlay()">
+                            <i class="fa-solid fa-play"></i>
+                        </button>
+
+                        <input type="range" id="progress" value="0" min="0" max="100" />
+
+                        <input type="text" id="yt-link" placeholder="Enter YouTube Link" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="footer-buttons-container">
+                <div id="coins-div">
+                    <p><i class="fa-solid fa-coins"></i></p>
+                    <p id ="coins" >0</p>
+                </div>
+                <div id="nav-buttons" data-active="0">
+                    <ul>
+                        <li><button onclick="moveCircle(0)"><i class="fa-solid fa-cart-shopping"></i></button></li>
+                        <li><button onclick="moveCircle(1)"><i class="fa-solid fa-users-viewfinder"></i></button></li>
+                        <li><button onclick="moveCircle(2)"><i class="fa-solid fa-suitcase-rolling"></i></button></li>
+                    </ul>
+                </div>
+                <div id="siting-time-button">
+                    <button onclick="sittingPanal.ShowSittingPanal(event);"><i class="fa-solid fa-gear" style="color: white;"></i></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="module" src="mainPage/logic/FireBase.js"></script>
+    <script type="module" src="mainPage/logic/TimerLogic.js"></script>
+    <script type="module" src="mainPage/logic/rooms.js"></script>
+    <script type="module" src="mainPage/logic/sitting.js"></script>
+    <script src="mainPage/logic/AudioPlayer.js"></script>
+    <!-- <script src="logic/logic.js"></script> -->
+     <script type="module" src="mainPage/logic/shop.js"></script>
+     <script src="mainPage/logic/sidebar.js"></script>
+     <script src="mainPage/logic/roomButtons.js"></script>
+     <script type="module" src="mainPage/logic/main.js"></script>
+
+    
+</body>
+</html>

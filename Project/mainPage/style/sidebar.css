@@ -1,0 +1,726 @@
+/* ============================================================
+   LEFT SIDEBAR (CLEAN + FIXED)
+   ============================================================ */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height: 100vh;
+    background: rgba(20, 20, 40, 0.95);
+    border-right: 2px solid #7132fd;
+    padding: 40px 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
+
+    /* CLEAN TRANSITION (slide + expand) */
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    box-shadow: 5px 0 20px rgba(113, 50, 253, 0.3);
+}
+
+/* Open sidebar */
+.sidebar.open {
+    transform: translateX(0);
+}
+
+/* Expand for Rooms tab */
+.sidebar.wide {
+    width: 550px !important;
+}
+
+/* Heading */
+.sidebar h2 {
+    color: #7132fd;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Sidebar content */
+.sidebar-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+.sidebar-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.sidebar-content p,
+.sidebar-content li {
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   TOGGLE BUTTON (NOW CONSISTENT)
+   ============================================================ */
+/* ============================================================
+   FIXED SIDEBAR TOGGLE (CLEAN + CORRECT)
+   ============================================================ */
+.sidebar-toggle {
+    position: fixed;
+    top: 50%;
+    left: 10px;
+
+    width: 50px;
+    height: 50px;
+
+    transform: translateY(-50%); /* ← FIX: stays at left side always */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    background-color: #7132fd;
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.5em;
+    color: white;
+
+    z-index: 999;
+}
+
+/* Hover effect (does NOT move the button sideways anymore) */
+.sidebar-toggle:hover {
+    background-color: #9155ff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* ------------------------------------------------------------
+   Toggle position when sidebar is open
+   ------------------------------------------------------------ */
+
+/* Sidebar open → push button to sidebar width */
+.sidebar.open ~ .sidebar-toggle {
+    transform: translateY(-50%) translateX(350px);
+}
+
+/* Sidebar open + wide → push further */
+.sidebar.open.wide ~ .sidebar-toggle {
+    transform: translateY(-50%) translateX(550px);
+}
+
+
+/* ============================================================
+   DIM OVERLAY
+   ============================================================ */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 500;
+    cursor: pointer;
+}
+
+.sidebar-overlay.open {
+    display: block;
+}
+
+
+/* ============================================================
+   ROOMS LAYOUT (DISCORD STYLE)
+   ============================================================ */
+.room-layout {
+    display: flex;
+    height: 100%;
+    gap: 10px;
+}
+
+/* Users column */
+.user-list {
+    width: 80px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 5px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.user-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+    color: #ddd;
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+.user-item img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-bottom: 6px;
+    border: 2px solid #7132fd;
+}
+
+/* Chat panel */
+.chat-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Chat box */
+.chat-box {
+    flex: 1;
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 10px;
+    overflow-y: auto;
+    color: #ccc;
+    margin-bottom: 10px;
+
+    word-break: break-word; /* ← STOPS CHAT STRETCHING */
+}
+
+/* Chat input */
+.chat-input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background: #2b2b2b;
+    color: white;
+    margin-bottom: 8px;
+}
+.chat-input:focus {
+    outline: 2px solid #7132fd;
+}
+
+/* Send button */
+.chat-send-btn {
+    width: 100%;
+}
+
+
+/* Chat message constraint */
+#chatBox div.message {
+    max-width: 100%;
+}
+
+
+#shopping-content table tbody tr td img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    padding-right: 20px;
+}
+
+#shopping-content table tbody tr td i {
+    
+    padding-left: 0px;
+}
+
+
+/* ============================================================
+    SHOP & INVENTORY CARD GRID
+    ============================================================ */
+.item-grid {
+    display: grid;
+    /* Two columns, allowing items to be responsive */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.item-card {
+    background-color: rgba(255, 255, 255, 0.08); /* Dark background */
+    border-radius: 12px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+}
+
+.item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(113, 50, 253, 0.2);
+    border: 1px solid #7132fd;
+}
+
+.item-icon-wrapper {
+    /* This will be the image/icon area */
+    background: #282a36; /* Placeholder color */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* If you use an icon (like in the example image) */
+.item-icon {
+    font-size: 2.2rem;
+    color: #7132fd;
+}
+
+/* If you use a background image */
+.item-card img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.item-details {
+    margin-bottom: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 0 5px 0;
+    color: white;
+}
+
+.item-price, .item-status {
+    font-size: 0.85rem;
+    color: #b9bbbe;
+    margin: 0;
+}
+
+.buy-btn, .equip-btn {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+    SHOP & INVENTORY CARD GRID
+    ============================================================ */
+.item-grid {
+    display: grid;
+    /* Two columns, allowing items to be responsive */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.item-card {
+    background-color: rgba(255, 255, 255, 0.08); /* Dark background */
+    border-radius: 12px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid transparent;
+}
+
+.item-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(113, 50, 253, 0.2);
+    border: 1px solid #7132fd;
+}
+
+.item-icon-wrapper {
+    /* This will be the image/icon area */
+    background: #282a36; /* Placeholder color */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* If you use an icon (like in the example image) */
+.item-icon {
+    font-size: 2.2rem;
+    color: #7132fd;
+}
+
+/* If you use a background image */
+.item-card img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.item-details {
+    margin-bottom: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 0 0 5px 0;
+    color: white;
+}
+
+.item-price, .item-status {
+    font-size: 0.85rem;
+    color: #b9bbbe;
+    margin: 0;
+}
+
+.buy-btn, .equip-btn {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+    ROOMS LAYOUT (DISCORD STYLE)
+    ============================================================ */
+
+/* The main container for the user list and chat panel */
+.room-layout {
+    display: flex;
+    /* This calculation might vary based on your environment, 
+       but it ensures the layout takes up most of the sidebar height. */
+    height: calc(100% - 10px); 
+    gap: 10px;
+}
+
+/* LEFT: Users column (Fixed width) */
+.user-list {
+    width: 80px; 
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 5px;
+    border-radius: 10px;
+    overflow-y: auto;
+    flex-shrink: 0; 
+}
+
+/* RIGHT: Chat panel container (Takes remaining space) */
+.chat-panel {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Chat box (History area) */
+.chat-box {
+    flex-grow: 1; 
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 10px;
+    overflow-y: auto;
+    color: #ccc;
+    margin-bottom: 5px; 
+    word-break: break-word; 
+}
+
+/* Input Container (bottom of chat - new flex layout) */
+.chat-input-container {
+    display: flex; /* Makes input and button align horizontally */
+    gap: 8px;
+    padding-top: 5px; 
+}
+
+/* Chat input field */
+.chat-input {
+    flex-grow: 1; /* Input takes all available width */
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #2b2b2b;
+    color: white;
+    margin-bottom: 0; 
+}
+
+/* Send button */
+.chat-send-btn {
+    width: 80px; /* Fixed button width */
+    padding: 10px;
+    border-radius: 8px; 
+}
+
+/* ============================================================
+    CHAT MESSAGE STYLING
+    ============================================================ */
+
+.chat-box .message {
+    display: flex;
+    align-items: flex-start; /* Align avatar and text properly */
+    margin-bottom: 15px;
+}
+
+.chat-box .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    border: 1px solid #333;
+    flex-shrink: 0; /* Prevents avatar from resizing */
+}
+
+.chat-box .message-content {
+    flex-grow: 1;
+    min-width: 0; /* Ensures content wraps correctly */
+}
+
+.chat-box .username {
+    font-weight: bold;
+    color: #7132fd; 
+    margin-right: 8px;
+    font-size: 0.95rem;
+}
+
+.chat-box .timestamp {
+    font-size: 0.75rem;
+    color: #888;
+}
+
+.chat-box .text {
+    margin-top: 2px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #e0e0e0;
+}
+
+
+/* Update the User List container */
+.user-list {
+    /* Change width to allow for more text, 80px was too narrow */
+    width: 140px; 
+    padding: 10px;
+}
+
+/* User item (now uses flex to align the avatar/info block) */
+.user-item {
+    flex-direction: row; /* Align content horizontally */
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.user-item:hover {
+    background-color: rgba(113, 50, 253, 0.1); /* Highlight on hover */
+    cursor: pointer;
+}
+
+/* Avatar Wrapper (for positioning the status dot) */
+.avatar-wrapper {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+.user-item img {
+    width: 40px; /* Make avatar slightly smaller */
+    height: 40px;
+    margin-bottom: 0;
+    border-width: 1px; /* Reduce border size */
+}
+
+/* Status Dot Styling */
+.status-dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #1e1e1e; /* Border matches chat background for visibility */
+}
+
+/* Status Colors */
+.status-dot.idle {
+    background-color: #f1c40f; /* Yellow */
+}
+.status-dot.focus {
+    background-color: #2ecc71; /* Green: Focusing */
+}
+
+/* User Info Styling */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    flex-grow: 1;
+}
+
+.user-info .username {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: white;
+}
+
+.user-info .activity-text {
+    font-size: 0.75rem;
+    color: #a0a0a0; /* Subdued text for activity */
+    /* Truncate long activity text */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+}
+
+@media (max-width: 768px) {
+    /* --- SIDEBAR ADJUSTMENTS --- */
+    .sidebar {
+        /* Reduce width to leave a small margin, or use 100vw to cover all */
+        width: 100vw; 
+        /* Ensure it's hidden entirely */
+        transform: translateX(-100vw); 
+        /* Remove the fixed border-right for a full screen experience */
+        border-right: none;
+        
+        /* Reduce padding slightly for mobile screens */
+        padding: 20px; 
+    }
+
+    /* Open sidebar */
+    .sidebar.open {
+        /* Full width slide-in */
+        transform: translateX(0); 
+    }
+
+    /* Override the wide class for mobile, use full width */
+    .sidebar.wide {
+        width: 100vw !important; 
+    }
+
+    /* Reduce the size of the sidebar content heading for mobile */
+    .sidebar h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* ... (Sidebar adjustments from above) ... */
+
+    /* --- TOGGLE BUTTON ADJUSTMENTS --- */
+    .sidebar-toggle {
+        /* Move the button to the bottom right of the screen when closed */
+        top: auto; 
+        bottom: 15px; /* Adjust as needed */
+        left: auto;
+        right: 15px; /* New: Button starts on the right when closed */
+        transform: translateY(0); /* Resetting the desktop transform */
+        
+        /* Increase z-index just to be safe */
+        z-index: 1001; 
+    }
+    
+    /* Hover effect fix */
+    .sidebar-toggle:hover {
+        transform: scale(1.1); /* Keep the scale effect */
+    }
+
+    /* Sidebar open → push button */
+    .sidebar.open ~ .sidebar-toggle {
+        /* Push the button to the left side when the sidebar is open (full width) */
+        transform: translateX(calc(-100vw + 60px)); /* Move left by the full viewport width minus button width + margin */
+        left: 10px;
+        right: auto;
+        bottom: 15px;
+    }
+
+    /* Sidebar open + wide → push further (already handled by 100vw override) */
+    .sidebar.open.wide ~ .sidebar-toggle {
+        /* This can be removed or kept, but the previous rule will likely suffice */
+        transform: translateX(calc(-100vw + 60px));
+    }
+    
+    /* Make the original toggle position more predictable when closed */
+    .sidebar.open ~ .sidebar-toggle,
+    .sidebar.open.wide ~ .sidebar-toggle {
+        /* When open, it should move to the visible corner */
+        left: auto;
+        right: 15px;
+        transform: translateY(0);
+    }
+    
+    /* The problem on chat mode is that the content is too wide. */
+    /* The user-list and chat-panel need to stack vertically on small screens. */
+    .sidebar.open.wide ~ .sidebar-toggle {
+        /* When open, push it slightly off the edge */
+        /* transform: translateX(calc(-100vw + 60px)); */
+        left: 10px;
+        right: auto;
+        bottom: 15px;
+    }
+}
+
+/* Stacks the user list and chat panel vertically on mobile */
+@media (max-width: 768px) {
+    /* ... (Sidebar and Toggle adjustments from above) ... */
+
+    /* --- ROOMS LAYOUT ADJUSTMENTS --- */
+    .room-layout {
+        /* Stack the user list and chat panel vertically */
+        flex-direction: column; 
+        /* Give it a fixed, calculated height */
+        height: calc(100vh - 120px); 
+    }
+
+    /* User List (now on top) */
+    .user-list {
+        width: 100%; /* Take full width */
+        height: 120px; /* Fixed height for a horizontal scroll list (like Discord on mobile) */
+        flex-direction: row; /* Make items scroll horizontally */
+        flex-wrap: nowrap;
+        overflow-x: auto; /* Enable horizontal scroll */
+        overflow-y: hidden;
+        padding: 5px 10px;
+    }
+    
+    .user-item {
+        flex-direction: column; /* Revert user item to vertical for icons */
+        flex-shrink: 0; /* Important: prevents items from stretching */
+        width: 60px; /* Fixed width for icon/name block */
+    }
+    
+    .user-info {
+        text-align: center;
+    }
+
+    /* Chat Panel (now on the bottom, takes remaining height) */
+    .chat-panel {
+        flex: 1; /* Takes the rest of the available height */
+    }
+
+    /* Chat Box (message history) */
+    .chat-box {
+        flex: 1; /* Takes up its own space */
+    }
+}

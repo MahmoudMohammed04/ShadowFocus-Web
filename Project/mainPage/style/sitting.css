@@ -1,0 +1,183 @@
+#sitting-panal{
+    width: 500px;
+    height: 600px;
+    position: absolute;
+    background-color: #222;
+    top: -20%;
+    left: 34%;
+    z-index: 1000;
+    border-radius: 12px;
+    
+    /* transform: translate(-50%, -50%) */
+}
+
+#sitting-panal[visible = "false"]{
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+#sitting-panal[visible = "true"]{
+    display: block;
+    pointer-events: all;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+#sitting-panal input[type = "text"]{
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: none;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: background 0.2s ease;
+}
+
+#sitting-panal input[type = "text"]:focus{
+    background-color: #3a3a3a;
+}
+
+
+
+@media(width<1200px) {
+    #sitting-panal{
+      
+        top: -27%;
+        left: 21%;
+        
+        /* transform: translate(-50%, -50%) */
+    }
+}
+
+/* ============================================================
+    SITTING PANEL (MODAL) STYLES
+    ============================================================ */
+
+/* The Modal Backdrop (Overlay) */
+#sitting-panal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Dark, semi-transparent backdrop */
+    z-index: 2000; /* Must be higher than everything else */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Animation for visibility */
+    opacity: 0;
+    pointer-events: none; /* Allows clicks underneath when closed */
+    transition: opacity 0.3s ease;
+}
+
+#sitting-panal-overlay[visible="true"] {
+    opacity: 1;
+    pointer-events: auto; /* Enables interaction when visible */
+}
+
+/* The Modal Content Container */
+#sitting-panal {
+    position: absolute;
+    background: #1e1e35; /* Dark purple/blue background */
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px; /* Max width for a clean look */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    color: #e0e0e0;
+
+    /* Center the modal */
+    left: 0%;
+    top: 0%;
+    
+
+    /* Entry Animation */
+    transform: translateY(20px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#sitting-panal-overlay[visible="true"] #sitting-panal {
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+#sitting-panal-overlay[visible="false"] #sitting-panal {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Header and Close Button */
+#sitting-panal h2 {
+    color: #7132fd;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: white;
+}
+
+/* Input Fields and Labels */
+#sitting-panal label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #b9bbbe;
+}
+
+#sittingInput {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #3d3e5a;
+    border-radius: 8px;
+    background: #2b2b48;
+    color: white;
+    font-size: 1rem;
+}
+
+#sittingInput::placeholder {
+    color: #7a7a99;
+}
+
+/* Settings Group (e.g., Checkboxes) */
+.settings-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #3d3e5a;
+}
+
+.settings-group p {
+    margin: 0;
+}
+
+/* Log Out Button */
+#sittingBtn {
+    width: 100%;
+    margin-top: 25px; /* Increase margin for separation */
+    padding: 12px;
+}

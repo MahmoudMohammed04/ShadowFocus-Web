@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShadowFocusLogin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #e0e5ec;
+        }
+
+        /* Remove validation icons */
+        .form-control.is-valid, .was-validated .form-control:valid {
+            background-image: none !important;
+        }
+
+        .form-control.is-invalid, .was-validated .form-control:invalid {
+            background-image: none !important;
+        }
+
+
+        #flip-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.9s ease;
+        }
+        #flip-wrapper.flip {
+            transform: rotateY(180deg);
+        }
+
+        .flip-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            transition: opacity .3s ease;
+        }
+
+        #signup-face { transform: rotateY(180deg); }
+        #flip-wrapper:not(.flip) #signup-face { opacity: 0; pointer-events: none; }
+        #flip-wrapper.flip #login-face { opacity: 0; pointer-events: none; }
+
+        #main-container{
+            max-width: 600px;
+            height: 600px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: #e0e5ec;
+            box-shadow: -20px -15px 30px 10px #c1c6d1,
+                        20px 15px 30px 10px #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .input-field, .input-field:focus{
+            box-shadow: inset 3px 3px 6px 2px #c1c6d1,
+                        inset -3px -3px 6px 2px #f7f7f9;
+            background-color: #dee3ea;
+            border-radius: 13px;
+            border: none;
+        }
+
+        #circle{
+            width: 80px;
+            height: 80px;
+            background-color: #e0e5ec;
+            border-radius: 50%;
+            box-shadow: -5px -5px 15px 5px #ffffffb7,
+                        5px 5px 15px 5px #c1c6d1;
+            margin: 0 auto 20px auto;
+        }
+
+        #Sign-in, #Register {
+            box-shadow: -5px -5px 15px 5px #ffffffb2,
+                        5px 5px 15px 5px #c9ced9;
+            height: 70px;
+            width: 100%;
+            border-radius: 15px;
+            background-color: #e0e5ec;
+            border: none;
+            font-weight: bold;
+            color: #555c7b;
+            font-size: 20px;
+        }
+
+        .beside-input{
+            background-color: #dee3ea;
+            width: 50px;
+            height: 60px;
+            border-top-left-radius: 13px;
+            border-bottom-left-radius: 13px;
+        }
+
+        .button-hide{
+            border-radius: 13px;
+            background-color: #e0e5ec00;
+            border: none;
+            position: absolute;
+            right: 6px;
+            top: 14%;
+            height: 40px;
+            width: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <div id="main-container" class="container">
+
+        <div id="flip-wrapper">
+
+            <!-- LOGIN FACE -->
+            <div class="flip-face" id="login-face">
+                <div id="circle">
+                    <i class="fa-regular fa-user" style="color:#6c7293;margin-top:12px;margin-left:19px;font-size:50px;"></i>
+                </div>
+                <h3 class="text-center" style="color:#3d4468;font-weight:bold;">Shadow Focus</h3>
+                <p class="text-center" style="color:#6c7293;">Please login to your account</p>
+
+                <form id="loginForm"  >
+                    <div class="mb-3 d-flex">
+                        <div class="beside-input d-flex align-items-center justify-content-center">
+                            <i class="fa-regular fa-envelope" style="font-size:1.25rem;"></i>
+                        </div>
+                        <div class="form-floating flex-grow-1">
+                            <input id="validationDefault01" type="email" class="form-control input-field" placeholder="Email address" required>
+                            <label>Email address</label>
+                            <div class="invalid-feedback">Please enter a valid email.</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 d-flex">
+                        <div class="beside-input d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-lock" style="font-size:1.25rem;"></i>
+                        </div>
+                        <div class="form-floating flex-grow-1" style="position:relative;">
+                            <input id="validationDefault02" type="password" class="form-control input-field" placeholder="Password" required minlength="6">
+                            <label>Password</label>
+                            <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                            <button class="button-hide" type="button"><i id="eye1" class="fa-regular fa-eye-slash"></i></button>
+                        </div>
+                    </div>
+
+                    <button id="Sign-in" type="submit">Sign in</button>
+                </form>
+
+                <p class="text-center mt-3" style="color:#6c7293;">
+                    Don't have an account? 
+                    <a id="toSignUp" href="#" style="text-decoration:none;color:#3d4468;font-weight:bold;">Sign Up</a>
+                </p>
+            </div>
+
+            <!-- SIGNUP FACE -->
+            <div class="flip-face" id="signup-face">
+                <h3 class="text-center mt-4" style="color:#3d4468;font-weight:bold;">Register</h3>
+                <p class="text-center" style="color:#6c7293;">Create your account</p>
+
+                <form id="signupForm" class="mt-4">
+                    <div class="mb-3 d-flex">
+                        <div class="beside-input d-flex align-items-center justify-content-center">
+                            <i class="fa-regular fa-user" style="font-size:1.25rem;"></i>
+                        </div>
+                        <div class="form-floating flex-grow-1">
+                            <input id = "validationDefault03" type="text" class="form-control input-field" placeholder="Full Name" required>
+                            <label>Full Name</label>
+                            <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 d-flex">
+                        <div class="beside-input d-flex align-items-center justify-content-center">
+                            <i class="fa-regular fa-envelope" style="font-size:1.25rem;"></i>
+                        </div>
+                        <div class="form-floating flex-grow-1">
+                            <input id = "validationDefault04" type="email" class="form-control input-field" placeholder="Email" required>
+                            <label>Email</label>
+                            <div class="invalid-feedback">Please enter a valid email.</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 d-flex">
+                        <div class="beside-input d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-lock" style="font-size:1.25rem;"></i>
+                        </div>
+                        <div class="form-floating flex-grow-1" style="position:relative;">
+                            <input id="validationDefault05" type="password" class="form-control input-field" placeholder="Password" required minlength="6">
+                            <label>Password</label>
+                            <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                            <button class="button-hide" type="button"><i id="eye2" class="fa-regular fa-eye-slash"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 d-flex">
+                        <div class="beside-input d-flex align-items-center justify-content-center">
+                            <i class="fa-solid fa-lock" style="font-size:1.25rem;"></i>
+                        </div>
+                        <div class="form-floating flex-grow-1" style="position:relative;">
+                            <input id="validationDefault06" type="password" class="form-control input-field" placeholder="Confirm Password" required minlength="6">
+                            <label>Confirm Password</label>
+                            <div class="invalid-feedback">Passwords must match.</div>
+                            <button class="button-hide" type="button"><i id="eye3" class="fa-regular fa-eye-slash"></i></button>
+                        </div>
+                    </div>
+
+                    <button id="Register" type="submit">Register</button>
+                </form>
+
+                <p class="text-center mt-3" style="color:#6c7293;">
+                    Already have an account? 
+                    <a id="backToLogin" href="#" style="text-decoration:none;color:#3d4468;font-weight:bold;">Sign In</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</main>
+<footer>
+    <div id="loginAlert" class="alert alert-danger alert-dismissible fade" role="alert">
+    <strong>Login failed!</strong> Email or password is incorrect.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+</footer>
+
+<script src="log-in.js" type="module"></script>
+
+</body>
+</html>
