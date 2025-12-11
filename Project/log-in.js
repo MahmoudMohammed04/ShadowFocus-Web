@@ -1,51 +1,4 @@
 
-//   // Import the functions you need from the SDKs you need
-
-//   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-
-//   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-
-//   import { getAuth, signInWithEmailAndPassword,createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-
-//   import { getFirestore,doc,setDoc, collection, getDocs, query, where } 
-//     from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
-
-//     import{} from "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js";
-//   // TODO: Add SDKs for Firebase products that you want to use
-
-//   // https://firebase.google.com/docs/web/setup#available-libraries
-
-
-//   // Your web app's Firebase configuration
-
-//   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-//   const firebaseConfig = {
-
-//     apiKey: "AIzaSyAdTtshlWmlWmRZm6BwRyVptRWaIJuTBls",
-
-//     authDomain: "webshadow-735f4.firebaseapp.com",
-
-//     projectId: "webshadow-735f4",
-
-//     storageBucket: "webshadow-735f4.firebasestorage.app",
-
-//     messagingSenderId: "474575284548",
-
-//     appId: "1:474575284548:web:490e24e45ed8549e8f0f11",
-
-//     measurementId: "G-69X3MFE5CW"
-
-//   };
-
-
-//   // Initialize Firebase
-
-//   const app = initializeApp(firebaseConfig);
-
-//   const analytics = getAnalytics(app);
-
-//   const db = getFirestore(app);
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
@@ -72,13 +25,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB7sw2Q34Qh5-TKF3EZXY-RAtotfZu8Ec0",
-    authDomain: "maf21-de0fc.firebaseapp.com",
-    projectId: "maf21-de0fc",
-    storageBucket: "maf21-de0fc.firebasestorage.app",
-    messagingSenderId: "532823832819",
-    appId: "1:53823832819:web:b86b5d5ea808edea4c9f86",
-    measurementId: "G-N30F9SD4J8"
+    
 };
 
 const app = initializeApp(firebaseConfig);
@@ -319,3 +266,4 @@ setupPasswordMatch();
     toggleEye("eye1","validationDefault02");
     toggleEye("eye2","validationDefault05");
     toggleEye("eye3","validationDefault06");
+
