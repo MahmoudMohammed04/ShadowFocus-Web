@@ -1,6 +1,6 @@
 try the website --> https://shadowfocus.netlify.app/login.html
 
-
+Note the Firebase Configration need to be edit in firebase.js and login.js 
 
 <img width="1869" height="960" alt="image" src="https://github.com/user-attachments/assets/bf4ee16d-a8ea-474d-ae5b-f8d4352d5e22" />
 
