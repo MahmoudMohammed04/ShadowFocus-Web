@@ -5,10 +5,10 @@ import {user,setDoc,getDocs,getDoc,collection,db,doc} from "./FireBase.js";
 
 window.addEventListener('load', async () => {
 
-    if(!user)
-    {
-        window.location.href = "../login.html";
-    }  
+    // if(!user)
+    // {
+    //     window.location.href = "../login.html";
+    // }  
 
     // await setDoc(doc(db, "shop", "item1"), {
     //     id:1,
@@ -41,3 +41,4 @@ window.addEventListener('load', async () => {
     
     moveCircle(0);
 });
+
