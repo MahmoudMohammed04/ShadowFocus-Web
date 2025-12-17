@@ -1,4 +1,7 @@
-try the website --> https://shadowfocus.netlify.app/login.html
+🔗 Google Drive link for code explanation.                     https://drive.google.com/drive/folders/1YHgiqxDJgs-h8PlGBfFhGcYD8VANZ2a7    
+
+try the website --> 
+https://shadowfocus.netlify.app/login.html
 
 Note the Firebase Configration need to be edit in firebase.js and login.js 
 
